@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crisp Margins — Operational consulting for owner-run businesses</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192x192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F2EC;
+    --paper-soft:#ECE8DC;
+    --ink:#2E3A39;
+    --ink-dim:#6B7775;
+    --line:#DDD6C4;
+    --sage:#6E8C82;
+    --sage-deep:#4F6B62;
+    --tan:#D8CFAE;
+    --warn:#B5764F;
+    --radius:6px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--sage);color:#fff;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 32px;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(244,242,236,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;}
+  .wordmark{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:0.01em;color:var(--ink);}
+  .wordmark .dot{color:var(--sage-deep);}
+  .navlinks{display:flex;gap:36px;font-size:0.9rem;color:var(--ink-dim);}
+  .navlinks a{transition:color .15s;}
+  .navlinks a:hover, .navlinks a:focus-visible{color:var(--ink);}
+  .nav-cta{
+    font-size:0.85rem;font-weight:500;color:#fff;
+    background:var(--sage-deep);padding:9px 18px;border-radius:var(--radius);
+    transition:background .15s;
+  }
+  .nav-cta:hover{background:var(--sage);}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px;color:var(--ink);}
+  .menu-toggle svg{display:block;}
+  .mobile-menu{
+    display:none;flex-direction:column;
+    background:var(--paper);border-bottom:1px solid var(--line);
+    padding:8px 0 16px;
+  }
+  .mobile-menu a{
+    padding:14px 32px;font-size:0.95rem;color:var(--ink);
+    border-bottom:1px solid var(--line);
+  }
+  .mobile-menu a:last-child{border-bottom:none;}
+  .mobile-menu.open{display:flex;}
+  @media(max-width:760px){
+    .navlinks{display:none;}
+    .menu-toggle{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding:108px 0 88px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-inner{position:relative;z-index:2;max-width:780px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem;color:var(--sage-deep);
+    letter-spacing:0.08em;text-transform:uppercase;
+    display:flex;align-items:center;gap:10px;margin-bottom:22px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--sage-deep);}
+  h1{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    font-size:clamp(2.3rem, 4.6vw, 3.6rem);
+    line-height:1.1;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+    margin-bottom:22px;
+  }
+  h1 em{font-style:normal;color:var(--sage-deep);}
+  @media(max-width:520px){ .hero-break{display:none;} }
+  .hero-tagline{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;
+    font-size:clamp(1.4rem,2.6vw,1.9rem);color:var(--sage-deep);margin-bottom:18px;
+  }
+  .hero-sub{
+    font-size:1.1rem;color:#56625F;max-width:560px;margin-bottom:38px;
+  }
+  .hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--sage-deep);color:#fff;font-weight:600;font-size:0.95rem;
+    padding:14px 26px;border-radius:var(--radius);border:none;cursor:pointer;
+    transition:background .15s, transform .15s;
+  }
+  .btn-primary:hover{background:var(--sage);transform:translateY(-1px);}
+  .btn-ghost{
+    font-size:0.9rem;color:var(--ink-dim);border-bottom:1px solid var(--line);
+    padding-bottom:4px;transition:color .15s,border-color .15s;
+  }
+  .btn-ghost:hover{color:var(--ink);border-color:var(--ink-dim);}
+
+  /* ---------- LEDGER STRIP ---------- */
+  .ledger-strip{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--line);
+    margin-top:64px;position:relative;z-index:2;
+  }
+  .ledger-cell{padding:20px 24px;border-right:1px solid var(--line);}
+  .ledger-cell:last-child{border-right:none;}
+  .ledger-num{font-family:'IBM Plex Mono',monospace;font-size:1.5rem;color:var(--ink);font-weight:500;}
+  .ledger-label{font-size:0.78rem;color:var(--ink-dim);margin-top:4px;}
+  @media(max-width:760px){
+    .ledger-strip{grid-template-columns:repeat(2,1fr);}
+    .ledger-cell{border-right:none;border-bottom:1px solid var(--line);}
+    .ledger-cell:nth-child(odd){border-right:1px solid var(--line);}
+    .ledger-cell:nth-last-child(-n+2){border-bottom:none;}
+  }
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:88px 0;border-bottom:1px solid var(--line);}
+  .section-head{max-width:620px;margin-bottom:56px;}
+  .section-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:var(--sage-deep);
+    text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px;display:block;
+  }
+  h2{
+    font-family:'Space Grotesk',sans-serif;font-weight:600;
+    font-size:clamp(1.6rem,3vw,2.2rem);color:var(--ink);letter-spacing:-0.01em;
+  }
+  .section-desc{color:#566260;margin-top:14px;font-size:1.02rem;}
+
+  /* ---------- SIGNATURE TABLE ---------- */
+  .ledger-table{border-top:1px solid var(--line);}
+  .ledger-row{display:grid;grid-template-columns:1.1fr 1fr 1fr;border-bottom:1px solid var(--line);}
+  .ledger-row.head{
+    font-family:'IBM Plex Mono',monospace;font-size:0.72rem;
+    text-transform:uppercase;letter-spacing:0.07em;color:var(--ink-dim);
+  }
+  .ledger-row > div{padding:20px 22px;}
+  .ledger-row > div:not(:last-child){border-right:1px solid var(--line);}
+  .ledger-row.head > div{padding:14px 22px;}
+  .row-task{color:var(--ink);font-weight:500;font-size:0.98rem;}
+  .row-yes{color:#3F5C50;font-size:0.95rem;}
+  .row-yes::before{content:"✓ ";color:var(--sage-deep);font-family:'IBM Plex Mono',monospace;}
+  .row-no{color:#7A6650;font-size:0.95rem;}
+  .row-no::before{content:"— ";color:var(--warn);font-family:'IBM Plex Mono',monospace;}
+  .row-blank{color:var(--ink-dim);font-family:'IBM Plex Mono',monospace;font-size:0.92rem;text-align:center;}
+  @media(max-width:700px){
+    .ledger-row{grid-template-columns:1fr;}
+    .ledger-row > div:not(:last-child){border-right:none;border-bottom:1px solid var(--line);}
+  }
+
+  /* ---------- SERVICES ---------- */
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .service-card{background:var(--paper);padding:36px 30px;display:flex;flex-direction:column;gap:16px;}
+  .service-kicker{font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:var(--sage-deep);letter-spacing:0.05em;}
+  .service-name{font-family:'Space Grotesk',sans-serif;font-size:1.25rem;font-weight:600;color:var(--ink);}
+  .service-desc{color:#56625F;font-size:0.93rem;flex-grow:1;}
+  .service-fit{font-size:0.82rem;color:var(--ink-dim);border-top:1px solid var(--line);padding-top:14px;}
+  .service-fit b{color:var(--ink);font-weight:500;}
+  @media(max-width:880px){ .services-grid{grid-template-columns:1fr;} }
+
+  /* ---------- PROCESS ---------- */
+  .process-list{border-top:1px solid var(--line);}
+  .process-item{
+    display:grid;grid-template-columns:64px 1fr;gap:24px;
+    padding:30px 0;border-bottom:1px solid var(--line);align-items:start;
+  }
+  .process-step{font-family:'IBM Plex Mono',monospace;color:var(--sage-deep);font-size:0.95rem;}
+  .process-title{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;color:var(--ink);font-weight:600;margin-bottom:6px;}
+  .process-desc{color:#566260;font-size:0.95rem;max-width:540px;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;}
+  .about-quote{
+    font-family:'Space Grotesk',sans-serif;font-size:1.4rem;line-height:1.4;
+    color:var(--ink);border-left:2px solid var(--sage-deep);padding-left:24px;
+  }
+  .about-list{margin-top:28px;display:flex;flex-direction:column;gap:14px;}
+  .about-list div{font-size:0.93rem;color:#566260;display:flex;gap:12px;align-items:flex-start;}
+  .about-list span.mark{color:var(--sage-deep);font-family:'IBM Plex Mono',monospace;flex-shrink:0;}
+  @media(max-width:880px){ .about-grid{grid-template-columns:1fr;gap:36px;} }
+
+  /* ---------- CTA ---------- */
+  .cta-section{background:var(--paper-soft);}
+  .cta-inner{display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;}
+  .cta-inner h2{max-width:460px;}
+  form.cta-form{display:flex;gap:0;border:1px solid var(--line);max-width:420px;width:100%;border-radius:var(--radius);overflow:hidden;}
+  form.cta-form input{
+    flex:1;background:transparent;border:none;color:var(--ink);
+    padding:14px 16px;font-family:'Inter',sans-serif;font-size:0.92rem;outline:none;
+  }
+  form.cta-form input::placeholder{color:var(--ink-dim);}
+  form.cta-form button{
+    background:var(--sage-deep);color:#fff;border:none;font-weight:600;
+    padding:0 22px;cursor:pointer;font-size:0.9rem;transition:background .15s;
+  }
+  form.cta-form button:hover{background:var(--sage);}
+  .form-note{font-size:0.78rem;color:var(--ink-dim);margin-top:10px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:40px 0;}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  .footer-left{font-size:0.85rem;color:var(--ink-dim);}
+  .footer-right{display:flex;gap:28px;font-size:0.85rem;color:var(--ink-dim);}
+  .footer-right a:hover{color:var(--ink);}
+
+  @media (prefers-reduced-motion: reduce){ *{transition:none !important;} }
+  :focus-visible{outline:2px solid var(--sage-deep);outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="wordmark">CRISP<span class="dot">·</span>MARGINS</div>
+    <div class="navlinks">
+      <a href="#approach">Approach</a>
+      <a href="#services">Services</a>
+      <a href="#process">Process</a>
+      <a href="#about">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <a href="https://calendly.com/crispmargins/intro_call" target="_blank" rel="noopener" class="nav-cta">Book a call</a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <line x1="2" y1="6" x2="20" y2="6"></line>
+          <line x1="2" y1="11" x2="20" y2="11"></line>
+          <line x1="2" y1="16" x2="20" y2="16"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#approach">Approach</a>
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#about">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div class="eyebrow">Operational consulting for owner-run businesses</div>
+    <div class="hero-tagline">Cut the noise. Keep the edge.</div>
+    <h1>We fix what's slow.<br class="hero-break">We use AI when it's <em>actually</em> the fix.</h1>
+    <p class="hero-sub">We look at how your business actually runs day to day, then bring in AI only where it genuinely saves time, money, or stress; on customer engagement, faster quotes, cleaner books, and follow-up that doesn't get missed.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://calendly.com/crispmargins/intro_call" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none;">Book an appointment</a>
+      <a href="#approach" class="btn-ghost">See how we think about this →</a>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="ledger-strip">
+      <div class="ledger-cell">
+        <div class="ledger-num">15+ yrs</div>
+        <div class="ledger-label">Real experience streamlining operations for the world's most recognized brand</div>
+      </div>
+      <div class="ledger-cell">
+        <div class="ledger-num">1:1</div>
+        <div class="ledger-label">Personal engagements to understand the vision of your business</div>
+      </div>
+      <div class="ledger-cell">
+        <div class="ledger-num">No</div>
+        <div class="ledger-label">Bots, dashboards, or jargon you didn't ask for</div>
+      </div>
+      <div class="ledger-cell">
+        <div class="ledger-num">Yes</div>
+        <div class="ledger-label">Plain audit of where automation actually pays off</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="approach">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">The honest version</span>
+      <h2>Where AI helps. Where it doesn't.</h2>
+      <p class="section-desc">Every operation has tasks that are repetitive and low-stakes, and has tasks that need a person who knows the customer, the trade, or the file. We partner with you to determine which is which before we touch anything.</p>
+    </div>
+
+    <div class="ledger-table">
+      <div class="ledger-row head">
+        <div>Operational task</div>
+        <div>Good fit for automation</div>
+        <div>Keep a human on it</div>
+      </div>
+      <div class="ledger-row">
+        <div class="row-task">Following up on quotes &amp; missed calls</div>
+        <div class="row-yes">Drafts and sends the first nudge</div>
+        <div class="row-blank">&ndash;</div>
+      </div>
+      <div class="ledger-row">
+        <div class="row-task">Pricing a custom or sensitive job</div>
+        <div class="row-blank">&ndash;</div>
+        <div class="row-no">Your judgment, every time</div>
+      </div>
+      <div class="ledger-row">
+        <div class="row-task">Sorting and tagging inbound leads</div>
+        <div class="row-yes">Fast, consistent, never forgets</div>
+        <div class="row-blank">&ndash;</div>
+      </div>
+      <div class="ledger-row">
+        <div class="row-task">A frustrated customer on the phone</div>
+        <div class="row-blank">&ndash;</div>
+        <div class="row-no">No script replaces a real person</div>
+      </div>
+      <div class="ledger-row">
+        <div class="row-task">Reconciling invoices &amp; reminders</div>
+        <div class="row-yes">Cleans up hours of admin a week</div>
+        <div class="row-blank">&ndash;</div>
+      </div>
+      <div class="ledger-row">
+        <div class="row-task">Deciding what your brand sounds like</div>
+        <div class="row-blank">&ndash;</div>
+        <div class="row-no">That's the part clients actually buy</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">Engagements</span>
+      <h2>Three ways to work together</h2>
+      <p class="section-desc">Start with a clear-eyed look at your operation, then go as deep as makes sense. No package is sold bigger than the problem.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-kicker">01 · Audit</span>
+        <h3 class="service-name">Ops Audit</h3>
+        <p class="service-desc">A focused review of where time and money leak in your day-to-day — quoting, scheduling, follow-up, admin. You get a plain-language report and a short list of fixes, ranked by payoff.</p>
+        <div class="service-fit"><b>Best for:</b> owners who want a second opinion before spending on anything.</div>
+      </div>
+      <div class="service-card">
+        <span class="service-kicker">02 · Build</span>
+        <h3 class="service-name">Ops Overhaul</h3>
+        <p class="service-desc">We implement the fixes — new workflows, automations where they earn their place, and the systems to run them. Built around your existing tools, not a rip-and-replace.</p>
+        <div class="service-fit"><b>Best for:</b> businesses ready to act on a clear plan.</div>
+      </div>
+      <div class="service-card">
+        <span class="service-kicker">03 · Partner</span>
+        <h3 class="service-name">Ops Partner</h3>
+        <p class="service-desc">Ongoing monthly support — we keep tuning the systems as your business changes, and stay on call when something breaks or a new opportunity shows up.</p>
+        <div class="service-fit"><b>Best for:</b> teams that want this handled, not revisited.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag">How it runs</span>
+      <h2>A short, ordered process</h2>
+    </div>
+    <div class="process-list">
+      <div class="process-item">
+        <div class="process-step">01</div>
+        <div>
+          <div class="process-title">Walkthrough</div>
+          <div class="process-desc">A conversation about how work actually moves through your business today — not how the org chart says it should.</div>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="process-step">02</div>
+        <div>
+          <div class="process-title">Plain-language audit</div>
+          <div class="process-desc">A short written report: what's costing you time, what's worth automating, and what isn't worth touching.</div>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="process-step">03</div>
+        <div>
+          <div class="process-title">Build, in order of payoff</div>
+          <div class="process-desc">We implement the highest-impact fixes first, test them against your real workflow, and adjust before moving to the next.</div>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="process-step">04</div>
+        <div>
+          <div class="process-title">Handover or ongoing support</div>
+          <div class="process-desc">You get systems your team can run without us — or we stay on as a monthly partner if you'd rather not think about it again.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <span class="section-tag">Why this is different</span>
+      <p class="about-quote">"I'm not selling you AI. I'm selling you a business that runs tighter, while using AI wherever it's genuinely the right tool for that."</p>
+    </div>
+    <div>
+      <p class="section-desc" style="margin-top:0;">Crisp Margins is run by an operator, not a software vendor. Years spent leading frontline retail teams and making high-volume operational decisions under pressure shaped the way we look at your business: people &amp; systems first, technology second.</p>
+      <div class="about-list">
+        <div><span class="mark">→</span> Background in high-volume retail leadership and frontline operations management</div>
+        <div><span class="mark">→</span> Trained in regulatory and risk-based decision-making, with a degree in Criminology</div>
+        <div><span class="mark">→</span> Hands-on experience building and shipping AI-assisted tools — not just reading about them</div>
+        <div><span class="mark">→</span> Every engagement is scoped 1:1; nothing here is a templated package</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="wrap cta-inner">
+    <div>
+      <span class="section-tag">Start here</span>
+      <h2>Tell us where the friction is.</h2>
+      <p class="section-desc">A short call, no obligation. Just an honest conversation.</p>
+    </div>
+    <div>
+      <a href="https://calendly.com/crispmargins/intro_call" target="_blank" rel="noopener" class="btn-primary" style="display:inline-block;text-decoration:none;">Book an appointment</a>
+      <div class="form-note">Prefer to send a message first? <a href="contact.html" style="color:var(--sage-deep);text-decoration:underline;">Get in touch here</a>.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-left">© 2026 Crisp Margins, a Primoral Inc. company.</div>
+    <div class="footer-right">
+      <a href="#approach">Approach</a>
+      <a href="#services">Services</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  toggle.addEventListener('click', function(){
+    const isOpen = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  menu.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', function(){
+      menu.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>
